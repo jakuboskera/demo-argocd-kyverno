@@ -17,5 +17,5 @@ spec:
         app: demo
     spec:
       containers:
-      - name: test
-        image: ghcr.io/kyverno/test-verify-image:signed
+      - name: demo
+        image: ghcr.io/nirmata/demo-argocd:v1
