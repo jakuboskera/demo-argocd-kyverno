@@ -1,0 +1,19 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: image-digest
+spec:
+  validationFailureAction: Enforce
+  rules:
+    - name: replace-tag
+      match:
+        any:
+        - resources:
+            kinds:
+              - Pod
+      verifyImages:
+      - imageReferences:
+        - "*"
+        required: false
+        verifyDigest: true
+        mutateDigest: true
