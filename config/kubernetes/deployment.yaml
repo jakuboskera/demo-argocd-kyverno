@@ -2,22 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: mymusicstats
+    app: demo
     app.kubernetes.io/instance: demo-app
-  name: mymusicstats-deployment
+  name: demo-deployment
   namespace: demo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mymusicstats
+      app: demo
   template:
     metadata:
       labels:
-        app: mymusicstats
+        app: demo
     spec:
       containers:
-        - image: 'shashankssriva/mymusicstats-arm64:1.0.2'
-          name: mymusicstats
-          ports:
-            - containerPort: 80
+      - name: nginx
+        image: nginx:1.22
