@@ -9,20 +9,31 @@ ArgoCD demo app
 kind create cluster --name=kyverno-argocd
 ```
 
-## Install ArgoCD
-
-```sh
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-```
-
 ## Install Kyverno
 
 ```sh
 kubectl create -f https://github.com/kyverno/kyverno/raw/main/config/install-latest-testing.yaml
 ```
 
-## Install Policies
+## Install Kyverno Policies
 
-## Create Application
+```sh
+kubectl apply -f https://github.com/nirmata/demo-argocd/tree/main/config/kyverno-polices/
+```
 
+## Install ArgoCD
+
+```sh
+kubectl create ns argocd
+```
+
+```sh
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.10.0-rc1/manifests/install.yaml
+```
+
+## Create the ArgoCD Application
+
+```sh
+kubectl apply -f https://github.com/nirmata/demo-argocd/tree/main/config/argocd-app/
+```
 

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mymusicstats
+    app.kubernetes.io/instance: demo-app
+  name: mymusicstats-deployment
+  namespace: demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mymusicstats
+  template:
+    metadata:
+      labels:
+        app: mymusicstats
+    spec:
+      containers:
+        - image: 'shashankssriva/mymusicstats-arm64:1.0.2'
+          name: mymusicstats
+          ports:
+            - containerPort: 80
