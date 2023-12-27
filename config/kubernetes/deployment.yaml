@@ -17,5 +17,5 @@ spec:
         app: demo
     spec:
       containers:
-      - name: nginx
-        image: nginx:1.22
+      - name: test
+        image: ghcr.io/kyverno/test-verify-image:signed
