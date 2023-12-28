@@ -18,8 +18,24 @@ spec:
       mutate:
         patchStrategicMerge:
           spec:
-            securityContext:
-              +(runAsNonRoot): true
-              +(runAsUser): 1000
-              +(runAsGroup): 3000
-              +(fsGroup): 2000
+            containers:
+            - (name): "*"
+              +(securityContext):
+                +(runAsNonRoot): true
+                +(runAsUser): 1000
+                +(runAsGroup): 3000
+                +(fsGroup): 2000
+            (initContainers):
+            - (name): "*"
+              +(securityContext):
+                +(runAsNonRoot): true
+                +(runAsUser): 1000
+                +(runAsGroup): 3000
+                +(fsGroup): 2000
+            (ephemeralContainers):
+            - (name): "*"
+              +(securityContext):
+                +(runAsNonRoot): true
+                +(runAsUser): 1000
+                +(runAsGroup): 3000
+                +(fsGroup): 2000
