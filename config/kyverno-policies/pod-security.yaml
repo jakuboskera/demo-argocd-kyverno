@@ -1,14 +1,13 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: add-default-securitycontext
+  name: add-securitycontext
   annotations:
-    policies.kyverno.io/title: Add Default securityContext
+    policies.kyverno.io/title: Add restricted securityContext
     policies.kyverno.io/category: PSS
-    policies.kyverno.io/subject: Deployment
+    policies.kyverno.io/subject: Pod
     policies.kyverno.io/description: >-
-      This policy will mutate a Deployment to set a restricted securityContext 
-      for the pod and containers if they are not already set.
+      This policy will mutate a pod to set a restricted securityContext 
 spec:
   rules:
     - name: add-securitycontext
