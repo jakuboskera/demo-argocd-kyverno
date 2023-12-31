@@ -19,3 +19,10 @@ spec:
       containers:
       - name: demo
         image: ghcr.io/nirmata/demo-argocd:v1
+        volumeMounts:
+        - mountPath: /cache
+          name: cache-volume
+      volumes:
+      - name: cache-volume
+        emptyDir:
+          sizeLimit: 500Mi
