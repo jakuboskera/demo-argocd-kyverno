@@ -86,8 +86,9 @@ spec:
   rules:
     - name: disable-automount
       match:
-        resources:
-          kinds:
+        any:
+        - resources:
+            kinds:
             - Pod
       exclude:
         all:
