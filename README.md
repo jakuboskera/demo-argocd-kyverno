@@ -34,6 +34,6 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2
 ## Create the ArgoCD Application
 
 ```sh
-kubectl apply -f https://github.com/nirmata/demo-argocd/tree/main/config/argocd-app/
+kubectl apply -f https://raw.githubusercontent.com/nirmata/demo-argocd-kyverno/main/config/argocd-app/application.yaml
 ```
 

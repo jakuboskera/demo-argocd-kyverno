@@ -20,6 +20,11 @@ spec:
         - resources:
             kinds:
               - Pod
+      exclude:
+        all:
+        - resources:
+            namespaces:
+            - argocd
       verifyImages:
       - imageReferences:
         - "*"
@@ -48,6 +53,11 @@ spec:
       - resources:
           kinds:
           - Pod
+      exclude:
+        all:
+        - resources:
+            namespaces:
+            - argocd
     mutate:
       patchStrategicMerge:
         metadata:
@@ -79,6 +89,11 @@ spec:
         resources:
           kinds:
             - Pod
+      exclude:
+        all:
+        - resources:
+            namespaces:
+            - argocd
       mutate:
         patchStrategicMerge:
           spec:
