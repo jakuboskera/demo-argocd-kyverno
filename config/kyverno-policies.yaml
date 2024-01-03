@@ -1,0 +1,85 @@
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: image-digest
+  annotations:
+    policies.kyverno.io/title: Convert tags to digests
+    policies.kyverno.io/category: Supply Chain Security
+    policies.kyverno.io/subject: Pod
+    policies.kyverno.io/minversion: 1.11.0
+    policies.kyverno.io/description: >-
+      Image tags are mutable and can be spoofed. This policy resolves 
+      image tags to digests which are immutable.
+spec:
+  validationFailureAction: Enforce
+  rules:
+    - name: replace-tag
+      match:
+        any:
+        - resources:
+            kinds:
+              - Pod
+      verifyImages:
+      - imageReferences:
+        - "*"
+        required: false
+        verifyDigest: true
+        mutateDigest: true
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: add-safe-to-evict
+  annotations:
+    policies.kyverno.io/title: Add Safe To Evict
+    policies.kyverno.io/category: Other
+    policies.kyverno.io/subject: Pod
+    policies.kyverno.io/minversion: 1.6.0
+    policies.kyverno.io/description: >-
+      The Kubernetes cluster autoscaler does not evict pods that 
+      use hostPath or emptyDir volumes. To allow eviction of these pods, the annotation 
+      cluster-autoscaler.kubernetes.io/safe-to-evict=true must be added to the pods.       
+spec: 
+  rules: 
+  - name: annotate-empty-dir
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+    mutate:
+      patchStrategicMerge:
+        metadata:
+          annotations:
+            +(cluster-autoscaler.kubernetes.io/safe-to-evict): "true"
+        spec:          
+          volumes: 
+          - <(emptyDir): {}
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: service-account
+  annotations:
+    policies.kyverno.io/title: Disable Auto-Mount of Service Accounts
+    policies.kyverno.io/category: Other
+    policies.kyverno.io/subject: Pod
+    policies.kyverno.io/minversion: 1.6.0
+    policies.kyverno.io/description: >-
+      Kubernetes automatically mounts ServiceAccount credentials in each Pod.
+      The ServiceAccount may be assigned roles allowing Pods to access API resources.
+      Blocking this ability is an extension of the least privilege best practice and should
+      be followed if pods do not need to speak to the API server to function.
+      This policy ensures that mounting of these ServiceAccount tokens is blocked.
+spec:
+  rules:
+    - name: disable-automount
+      match:
+        resources:
+          kinds:
+            - Pod
+      mutate:
+        patchStrategicMerge:
+          spec:
+            +(automountServiceAccountToken): false
