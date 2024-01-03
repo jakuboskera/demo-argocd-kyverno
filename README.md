@@ -18,7 +18,7 @@ kubectl create -f https://github.com/kyverno/kyverno/raw/main/config/install-lat
 ## Install Kyverno Policies
 
 ```sh
-kubectl apply -f https://github.com/nirmata/demo-argocd/tree/main/config/kyverno-polices/
+kubectl apply -f https://raw.githubusercontent.com/nirmata/demo-argocd-kyverno/main/config/kyverno-policies.yaml
 ```
 
 ## Install ArgoCD
