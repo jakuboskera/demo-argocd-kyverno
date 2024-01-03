@@ -53,6 +53,11 @@ spec:
       - resources:
           kinds:
           - Pod
+    exclude:
+      all:
+      - resources:
+          namespaces:
+          - argocd
     mutate:
       patchStrategicMerge:
         metadata:
