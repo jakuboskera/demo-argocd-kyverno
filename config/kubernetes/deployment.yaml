@@ -7,6 +7,7 @@ metadata:
   name: demo-deployment
   namespace: demo
 spec:
+  revisionHistoryLimit: 0
   replicas: 1
   selector:
     matchLabels:
