@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: demo
-        image: nginx:1.27.0
+        image: nginx:1.27.0-alpine3.19
         volumeMounts:
         - mountPath: /cache
           name: cache-volume
