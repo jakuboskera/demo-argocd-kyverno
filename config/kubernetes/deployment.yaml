@@ -16,6 +16,8 @@ spec:
     metadata:
       labels:
         app: demo
+      annotations:
+        i-am: good
     spec:
       containers:
       - name: demo
