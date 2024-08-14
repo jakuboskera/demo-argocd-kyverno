@@ -17,7 +17,7 @@ spec:
       labels:
         app: demo
       annotations:
-        i-am: good
+        vig.cz/duck: foo
     spec:
       containers:
       - name: demo
