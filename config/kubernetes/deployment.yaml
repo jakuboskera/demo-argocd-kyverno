@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: demo
-        image: ghcr.io/nirmata/demo-argocd:v1
+        image: nginx:1.27.0
         volumeMounts:
         - mountPath: /cache
           name: cache-volume
